@@ -5,6 +5,9 @@ from getpass import getpass
 import time
 import sys
 import subprocess
+import platform
+
+sistema = 0
 
 HASH_ESPERADO = "3669e7add5d311474d0dd3c6e6020163d99c610af9519ad0194158e96d1f7f10"
 
@@ -66,9 +69,7 @@ def clear():
 
 
 def banner():
-
-	print(VERMELHO_FORTE, end="");
-
+	print(VERMELHO_FORTE, end="")
 	print(textwrap.dedent(fr"""
 	 _____ _                _           _     
 	|_   _| |__  _   _ _ __| |__  _   _| |__  
@@ -76,7 +77,6 @@ def banner():
 	  | | | | | | |_| | |  | | | | |_| | |_) |
 	  |_| |_| |_|\__,_|_|  |_| |_|\__,_|_.__/ {RESET}{MAGENTA}V2{RESET}
 	 """).strip("\n"))
-
 	print(RESET, end="")
     
 
@@ -100,9 +100,9 @@ def mostrar_jogos():
     print(f"{AMARELO_FORTE}\n!ALGUMS LINKS PODEM NÃO FUNCIONAR!{RESET}\n")
 
     print(f"{CIANO_FORTE}1 - Minecraft{RESET} ({VERDE_FORTE}https://quenq.com/apps/minecraft/{RESET})")
-    print(f"{CIANO_FORTE}2 - Gta vice city{RESET} ({VERDE_FORTE}https://quenq.com/apps/vice-city/{RESET}")
-    print(f"{CIANO_FORTE}3 - Gta 3{RESET} ({VERDE_FORTE}https://quenq.com/apps/iii-online/{RESET}")
-    print(f"{CIANO_FORTE}4 - Veck.io{RESET} ({VERDE_FORTE}https://zapgames.io/veck-io{RESET}")
+    print(f"{CIANO_FORTE}2 - Gta vice city{RESET} ({VERDE_FORTE}https://quenq.com/apps/vice-city/{RESET})")
+    print(f"{CIANO_FORTE}3 - Gta 3{RESET} ({VERDE_FORTE}https://quenq.com/apps/iii-online/{RESET})")
+    print(f"{CIANO_FORTE}4 - Veck.io{RESET} ({VERDE_FORTE}https://zapgames.io/veck-io{RESET})")
     
     escolha_de_jogo = input(f"\n{BRANCO_FORTE}digite sua escolha: {RESET}")
 
@@ -112,17 +112,12 @@ def mostrar_jogos():
     elif escolha_de_jogo == "2":
         print("abrindo gta vice city...")
         os.system("xdg-open https://quenq.com/apps/vice-city/")
-
     elif escolha_de_jogo == "3":
         print("abrindo gta 3...")
         os.system("xdg-open https://quenq.com/apps/iii-online/")
-
     elif escolha_de_jogo == "4":
         print("abrindo veck.io...")
         os.system("xdg-open https://zapgames.io/veck-io")
-
-
-        
 
 
 def mostrar_pra_debian():
@@ -137,17 +132,13 @@ def mostrar_pra_debian():
     if escolha == "1":
         print(f"{CIANO_MERDA}=== Instalando hack para kahoot === {RESET}")
         subprocess.run(comando_kahoot_debian, shell=True)
-
     elif escolha == "2":
         print(f"{CIANO_MERDA}=== Instalando zphisher === {RESET}")
         subprocess.run(comando_zphisher_debian, shell=True)
-    
     elif escolha == "3":
         mostrar_jogos()
-
     else:
         print("escolha invalida")
-
 
 
 def mostrar_pra_termux():
@@ -162,14 +153,11 @@ def mostrar_pra_termux():
     if escolha == "1":
         print(f"{CIANO_MERDA}=== Instalando hack para kahoot === {RESET}")
         subprocess.run(comando_kahoot_termux, shell=True)
-
     elif escolha == "2":
         print(f"{CIANO_MERDA}=== Instalando zphisher === {RESET}")
         subprocess.run(comando_zphisher_termux, shell=True)
-    
     elif escolha == "3":
         mostrar_jogos()
-
     else:
         print("escolha invalida")
 
@@ -180,19 +168,24 @@ menu()
 clear()
 banner()
 
-print(f"\n{AMARELO_FORTE}1 - termux\n2 - debian{RESET}\n")
+prefixo = os.getenv("PREFIX")
+try:
+    detctado = platform.freedesktop_os_release()
 
+    if detectado["ID"] == "debian":
+        print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}debian{RESET}")
+    time.sleep(1)
+    sistema = 2
+except OSError:
+    pass
 
-sistema = input(f"{BRANCO_FORTE}Escolha seu sistema: {RESET}")
+if "TERMUX_VERSION" in os.environ:
+    print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}termux{RESET}")
+    time.sleep(1)
+    sistema = 1
 
-if sistema == "1":
+if sistema == 1:
     mostrar_pra_termux()
-
-elif sistema == "2":
+elif sistema == 2:
     mostrar_pra_debian()
 
-else:
-    print("sistema invalido")
-    
-
- 
