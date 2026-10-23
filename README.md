@@ -10,4 +10,4 @@ git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && gc
 
 ```bash
 
-git clone https://github/ilzacoelhomt73-cmyk/thurhub.git && cd thuhub && python3 v2/thurhub.py 
+git clone https://github/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py 
