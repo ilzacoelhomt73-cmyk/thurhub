@@ -3,7 +3,7 @@
 # instalar versão C
 
 ```bash
-git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && gcc thurhub.c -o thurhub -lcrypto && ./thurhub
+git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && gcc v1/thurhub.c -o thurhub -lcrypto && ./thurhub
 ```
 
 # instalar versão python (V2)

@@ -107,14 +107,18 @@ def mostrar_jogos():
     escolha_de_jogo = input(f"\n{BRANCO_FORTE}digite sua escolha: {RESET}")
 
     if escolha_de_jogo == "1":
+        print("abrindo Minecraft...")
         os.system("xdg-open https://quenq.com/apps/minecraft/")
     elif escolha_de_jogo == "2":
+        print("abrindo gta vice city...")
         os.system("xdg-open https://quenq.com/apps/vice-city/")
 
     elif escolha_de_jogo == "3":
+        print("abrindo gta 3...")
         os.system("xdg-open https://quenq.com/apps/iii-online/")
 
     elif escolha_de_jogo == "4":
+        print("abrindo veck.io...")
         os.system("xdg-open https://zapgames.io/veck-io")
 
 
