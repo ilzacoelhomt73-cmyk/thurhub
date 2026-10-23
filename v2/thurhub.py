@@ -13,7 +13,7 @@ HASH_ESPERADO = "3669e7add5d311474d0dd3c6e6020163d99c610af9519ad0194158e96d1f7f1
 
 comando_vscode_debian = (
     "sudo apt update -y && "
-    "sudo apt install gnome-keyring && "
+    "sudo apt install gnome-keyring -y  && "
     "sudo apt install -y wget gpg && "
     "wget -qO- https://packages.microsoft.com/keys/microsoft.asc "
     "| gpg --dearmor "
