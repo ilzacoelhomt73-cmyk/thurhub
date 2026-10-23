@@ -23,7 +23,7 @@ comando_vscode_debian = (
     "https://packages.microsoft.com/repos/code stable main' "
     "| sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null && "
     "sudo apt update -y && "
-    "sudo apt install -y code"
+    "sudo apt install -y code && "
     "code"
 )
 
