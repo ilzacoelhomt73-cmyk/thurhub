@@ -9,5 +9,5 @@ git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && gc
 # instalar versão python (V2)
 
 ```bash
-
-git clone https://github/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py 
+git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py
+```
