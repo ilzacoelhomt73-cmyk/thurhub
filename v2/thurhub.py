@@ -1,3 +1,4 @@
+
 import hashlib
 import textwrap
 import os
@@ -13,7 +14,7 @@ HASH_ESPERADO = "3669e7add5d311474d0dd3c6e6020163d99c610af9519ad0194158e96d1f7f1
 
 comando_vscode_debian = (
     "sudo apt update -y && "
-    "sudo apt install gnome-keyring -y  && "
+    "sudo apt install gnome-keyring -y && "
     "sudo apt install -y wget gpg && "
     "wget -qO- https://packages.microsoft.com/keys/microsoft.asc "
     "| gpg --dearmor "
@@ -26,7 +27,6 @@ comando_vscode_debian = (
     "sudo apt install -y code && "
     "code"
 )
-
 
 comando_zphisher_debian = (
     "sudo apt update -y && "
@@ -77,25 +77,24 @@ BRANCO = "\033[37m"
 VERDE_FORTE = "\033[1;32m"
 VERMELHO_FORTE = "\033[1;31m"
 VERMELHO = "\033[31m"
-VERDE_FORTE = "\033[1;32m"
 VERDE = "\033[32m"
 RESET = "\033[0m"
+
 
 def clear():
     os.system("clear")
 
 
 def banner():
-	print(VERMELHO_FORTE, end="")
-	print(textwrap.dedent(fr"""
-	 _____ _                _           _     
-	|_   _| |__  _   _ _ __| |__  _   _| |__  
-	  | | | '_ \| | | | '__| '_ \| | | | '_ \ 
-	  | | | | | | |_| | |  | | | | |_| | |_) |
-	  |_| |_| |_|\__,_|_|  |_| |_|\__,_|_.__/ {RESET}{MAGENTA}V2{RESET}
-	 """).strip("\n"))
-	print(RESET, end="")
-    
+    print(VERMELHO_FORTE, end="")
+    print(textwrap.dedent(fr"""
+     _____ _                _           _
+    |_   _| |__  _   _ _ __| |__  _   _| |__
+      | | | '_ \| | | | '__| '_ \| | | | '_ \
+      | | | | | | |_| | |  | | | | |_| | |_) |
+      |_| |_| |_|\__,_|_|  |_| |_|\__,_|_.__/ {RESET}{MAGENTA}V2{RESET}
+    """).strip("\n"))
+    print(RESET, end="")
 
 
 def menu():
@@ -106,21 +105,21 @@ def menu():
         print("\n\033[1;32mAcesso liberado\033[0m")
         time.sleep(1)
     else:
-       print(f"\n{VERMELHO_FORTE}Acesso negado{RESET}")
-       sys.exit()
+        print(f"\n{VERMELHO_FORTE}Acesso negado{RESET}")
+        sys.exit()
 
 
 def mostrar_jogos():
     clear()
     banner()
 
-    print(f"{AMARELO_FORTE}\n!ALGUMS LINKS PODEM NÃO FUNCIONAR!{RESET}\n")
+    print(f"{AMARELO_FORTE}\n!ALGUNS LINKS PODEM NÃO FUNCIONAR!{RESET}\n")
 
     print(f"{CIANO_FORTE}1 - Minecraft{RESET} ({VERDE_FORTE}https://quenq.com/apps/minecraft/{RESET})")
     print(f"{CIANO_FORTE}2 - Gta vice city{RESET} ({VERDE_FORTE}https://quenq.com/apps/vice-city/{RESET})")
     print(f"{CIANO_FORTE}3 - Gta 3{RESET} ({VERDE_FORTE}https://quenq.com/apps/iii-online/{RESET})")
     print(f"{CIANO_FORTE}4 - Veck.io{RESET} ({VERDE_FORTE}https://zapgames.io/veck-io{RESET})")
-    
+
     escolha_de_jogo = input(f"\n{BRANCO_FORTE}digite sua escolha: {RESET}")
 
     if escolha_de_jogo == "1":
@@ -135,29 +134,40 @@ def mostrar_jogos():
     elif escolha_de_jogo == "4":
         print("abrindo veck.io...")
         os.system("xdg-open https://zapgames.io/veck-io")
+    else:
+        print("escolha invalida")
 
 
 def mostrar_pra_debian():
     clear()
     banner()
+
     print(f"\n{AMARELO_FORTE}1 - hack para kahoot{RESET}")
     print(f"{AMARELO_FORTE}2 - zphisher{RESET}")
     print(f"{AMARELO_FORTE}3 - jogos{RESET}")
     print(f"{AMARELO_FORTE}4 - vs code{RESET}")
-    
+
     escolha = input(f"{CIANO_FORTE}\nEscolha: {RESET}")
-    
+
     if escolha == "1":
-        print(f"{CIANO_MERDA}=== Instalando hack para kahoot === {RESET}")
-        subprocess.run(comando_kahoot_debian, shell=True)
+        if os.path.isdir("Kitty-Tools"):
+            print(f"{AMARELO_FORTE}=== hack para kahoot ja esta instalado ==={RESET}")
+        else:
+            print(f"{CIANO_MERDA}=== Instalando hack para kahoot ==={RESET}")
+            subprocess.run(comando_kahoot_debian, shell=True)
+
     elif escolha == "2":
-        print(f"{CIANO_MERDA}=== Instalando zphisher === {RESET}")
-        subprocess.run(comando_zphisher_debian, shell=True)
+        if os.path.isdir("zphisher"):
+            print(f"{AMARELO_FORTE}=== zphisher ja esta instalado ==={RESET}")
+        else:
+            print(f"{CIANO_MERDA}=== Instalando zphisher ==={RESET}")
+            subprocess.run(comando_zphisher_debian, shell=True)
+
     elif escolha == "3":
         mostrar_jogos()
-    
+
     elif escolha == "4":
-        print(f"{CIANO_FORTE}=== Instalando vs code === {RESET}")
+        print(f"{CIANO_FORTE}=== Instalando vs code ==={RESET}")
         subprocess.run(comando_vscode_debian, shell=True)
 
     else:
@@ -167,20 +177,30 @@ def mostrar_pra_debian():
 def mostrar_pra_termux():
     clear()
     banner()
+
     print(f"\n{AMARELO_FORTE}1 - hack para kahoot{RESET}")
     print(f"{AMARELO_FORTE}2 - zphisher{RESET}")
     print(f"{AMARELO_FORTE}3 - jogos{RESET}")
-    
+
     escolha = input(f"{CIANO_FORTE}\nEscolha: {RESET}")
-    
+
     if escolha == "1":
-        print(f"{CIANO_MERDA}=== Instalando hack para kahoot === {RESET}")
-        subprocess.run(comando_kahoot_termux, shell=True)
+        if os.path.isdir("Kitty-Tools"):
+            print(f"{AMARELO_FORTE}=== hack para kahoot ja esta instalado ==={RESET}")
+        else:
+            print(f"{CIANO_MERDA}=== Instalando hack para kahoot ==={RESET}")
+            subprocess.run(comando_kahoot_termux, shell=True)
+
     elif escolha == "2":
-        print(f"{CIANO_MERDA}=== Instalando zphisher === {RESET}")
-        subprocess.run(comando_zphisher_termux, shell=True)
+        if os.path.isdir("zphisher"):
+            print(f"{AMARELO_FORTE}=== zphisher ja esta instalado ==={RESET}")
+        else:
+            print(f"{CIANO_MERDA}=== Instalando zphisher ==={RESET}")
+            subprocess.run(comando_zphisher_termux, shell=True)
+
     elif escolha == "3":
         mostrar_jogos()
+
     else:
         print("escolha invalida")
 
@@ -188,18 +208,19 @@ def mostrar_pra_termux():
 clear()
 banner()
 menu()
+
 clear()
 banner()
 
-prefixo = os.getenv("PREFIX")
 try:
-    detctado = platform.freedesktop_os_release()
+    detectado = platform.freedesktop_os_release()
 
-    if detctado["ID"] == "debian":
+    if detectado["ID"] == "debian":
         print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}debian{RESET}")
-    time.sleep(1)
-    sistema = 2
-except OSError:
+        time.sleep(1)
+        sistema = 2
+
+except (OSError, AttributeError):
     pass
 
 if "TERMUX_VERSION" in os.environ:
@@ -211,4 +232,6 @@ if sistema == 1:
     mostrar_pra_termux()
 elif sistema == 2:
     mostrar_pra_debian()
+else:
+    print(f"{VERMELHO_FORTE}Sistema operacional não reconhecido.{RESET}")
 
