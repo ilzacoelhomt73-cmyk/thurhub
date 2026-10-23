@@ -172,7 +172,7 @@ prefixo = os.getenv("PREFIX")
 try:
     detctado = platform.freedesktop_os_release()
 
-    if detectado["ID"] == "debian":
+    if detctado["ID"] == "debian":
         print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}debian{RESET}")
     time.sleep(1)
     sistema = 2
