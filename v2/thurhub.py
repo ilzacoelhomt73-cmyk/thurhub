@@ -1,4 +1,3 @@
-
 import hashlib
 import textwrap
 import os
@@ -204,34 +203,38 @@ def mostrar_pra_termux():
     else:
         print("escolha invalida")
 
-
-clear()
-banner()
-menu()
-
-clear()
-banner()
-
 try:
-    detectado = platform.freedesktop_os_release()
 
-    if detectado["ID"] == "debian":
-        print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}debian{RESET}")
+    clear()
+    banner()
+    menu()
+
+    clear()
+    banner()
+
+    try:
+        detectado = platform.freedesktop_os_release()
+
+        if detectado["ID"] == "debian":
+            print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}debian{RESET}")
+            time.sleep(1)
+            sistema = 2
+
+    except (OSError, AttributeError):
+        pass
+
+    if "TERMUX_VERSION" in os.environ:
+        print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}termux{RESET}")
         time.sleep(1)
-        sistema = 2
+        sistema = 1
 
-except (OSError, AttributeError):
-    pass
+    if sistema == 1:
+        mostrar_pra_termux()
+    elif sistema == 2:
+        mostrar_pra_debian()
+    else:
+        print(f"{VERMELHO_FORTE}Sistema operacional não reconhecido.{RESET}")
 
-if "TERMUX_VERSION" in os.environ:
-    print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}termux{RESET}")
-    time.sleep(1)
-    sistema = 1
-
-if sistema == 1:
-    mostrar_pra_termux()
-elif sistema == 2:
-    mostrar_pra_debian()
-else:
-    print(f"{VERMELHO_FORTE}Sistema operacional não reconhecido.{RESET}")
+except KeyboardInterrupt:
+    print(f"\n{AMARELO_FORTE}Programa interrompido{RESET}")
 
