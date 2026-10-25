@@ -82,7 +82,7 @@ RESET = "\033[0m"
 
 
 def rodar(ferramenta, comando):
-    print(f"\n{VERDE}=== Executando {ferramenta}=== {RESET}")
+    print(f"\n{VERDE}=== Executando {ferramenta} ==={RESET}")
     subprocess.run(comando, shell=True)
 
 
