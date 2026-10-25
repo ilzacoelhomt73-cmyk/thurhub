@@ -80,6 +80,13 @@ VERDE = "\033[32m"
 RESET = "\033[0m"
 
 
+
+def rodar(ferramenta, comando):
+    print(f"\n{VERDE}=== Executando {ferramenta}=== {RESET}")
+    subprocess.run(comando, shell=True)
+
+
+
 def clear():
     os.system("clear")
 
@@ -154,6 +161,7 @@ def mostrar_pra_debian():
     if escolha == "1":
         if os.path.isdir("Kitty-Tools"):
             print(f"{AMARELO_FORTE}=== hack para kahoot ja esta instalado ==={RESET}")
+            rodar("hack para kahoot", "cd Kitty-Tools && python3 main.py")
         else:
             print(f"{CIANO_MERDA}=== Instalando hack para kahoot ==={RESET}")
             subprocess.run(comando_kahoot_debian, shell=True)
@@ -161,6 +169,9 @@ def mostrar_pra_debian():
     elif escolha == "2":
         if os.path.isdir("zphisher"):
             print(f"{AMARELO_FORTE}=== zphisher ja esta instalado ==={RESET}")
+
+            rodar("zphisher", "cd zphisher && bash zphisher.sh")
+
         else:
             print(f"{CIANO_MERDA}=== Instalando zphisher ==={RESET}")
             subprocess.run(comando_zphisher_debian, shell=True)
@@ -175,6 +186,7 @@ def mostrar_pra_debian():
     else:
         print("escolha invalida")
 
+    
 
 def mostrar_pra_termux():
     clear()
@@ -189,6 +201,7 @@ def mostrar_pra_termux():
     if escolha == "1":
         if os.path.isdir("Kitty-Tools"):
             print(f"{AMARELO_FORTE}=== hack para kahoot ja esta instalado ==={RESET}")
+            rodar("hack para kahoot", "cd Kitty-Tools && python3 main.py")
         else:
             print(f"{CIANO_MERDA}=== Instalando hack para kahoot ==={RESET}")
             subprocess.run(comando_kahoot_termux, shell=True)
@@ -196,6 +209,7 @@ def mostrar_pra_termux():
     elif escolha == "2":
         if os.path.isdir("zphisher"):
             print(f"{AMARELO_FORTE}=== zphisher ja esta instalado ==={RESET}")
+            rodar("zphisher", "cd zphisher && bash zphisher.sh")
         else:
             print(f"{CIANO_MERDA}=== Instalando zphisher ==={RESET}")
             subprocess.run(comando_zphisher_termux, shell=True)
