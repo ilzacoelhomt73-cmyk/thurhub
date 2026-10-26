@@ -6,6 +6,7 @@ import time
 import sys
 import subprocess
 import platform
+import requests
 
 sistema = 0
 
@@ -79,6 +80,55 @@ VERMELHO = "\033[31m"
 VERDE = "\033[32m"
 RESET = "\033[0m"
 
+sites = {
+        "Minecraft": "https://quenq.com/apps/minecraft/",
+        "Gta vice city": "https://quenq.com/apps/vice-city/",
+        "Gta 3": "https://quenq.com/apps/iii-online/",
+        "Veck.io": "https://veck.io/"
+        }
+
+def mostrar_jogos():
+    respostas = {}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+    
+    for nome, link in sites.items():
+        try:
+            resposta = requests.get(link, headers=headers, timeout=5)
+            
+            if resposta.status_code == 200:
+                respostas[nome] = ("ONLINE", VERDE_FORTE)
+            else:
+                respostas[nome] =("OFFLINE", VERMELHO_FORTE)
+        except requests.exceptions.RequestException:
+            respostas[nome] = ("OFFLINE", VERMELHO_FORTE)
+
+    clear()
+    banner()
+
+    print(f"\n{AMARELO_FORTE}!ALGUNS LINKS PODEM NÃO FUNCIONAR!{RESET}\n")
+
+    contador = 1
+    for nome, link in sites.items():
+        status_texto, cor = respostas[nome]
+        print(f"[{cor}{status_texto}{RESET}]{CIANO_FORTE} {contador} - {nome}{RESET} ({VERDE_FORTE}{link}{RESET})")
+        contador += 1
+
+    escolha_de_jogo = input(f"\n{BRANCO_FORTE}digite sua escolha: {RESET}")
+
+    if escolha_de_jogo == "1":
+        print("abrindo Minecraft...")
+        os.system("xdg-open https://quenq.com/apps/minecraft/")
+    elif escolha_de_jogo == "2":
+        print("abrindo gta vice city...")
+        os.system("xdg-open https://quenq.com/apps/vice-city")
+    elif escolha_de_jogo == "3":
+        print("abrindo gta 3...")
+        os.system("xdg-open https://quenq.com/apps/iii-online")
+    elif escolha_de_jogo == "4":
+        print("abrindo veck.io...")
+        os.system("xdg-open https://quenq.com/apps/veck-io")
+    else:
+        print("escolha invalida")
 
 
 def rodar(ferramenta, comando):
@@ -106,6 +156,7 @@ $$$$$$$$\ $$\                           $$\                 $$\
     print(RESET, end="")
 
 
+
 def menu():
     senha = getpass(f"{RESET}{BRANCO_FORTE}\ndigite a senha: {RESET}")
     hash_recebido = hashlib.sha256(senha.encode()).hexdigest()
@@ -116,35 +167,6 @@ def menu():
     else:
         print(f"\n{VERMELHO_FORTE}Acesso negado{RESET}")
         sys.exit()
-
-
-def mostrar_jogos():
-    clear()
-    banner()
-
-    print(f"{AMARELO_FORTE}\n!ALGUNS LINKS PODEM NÃO FUNCIONAR!{RESET}\n")
-
-    print(f"{CIANO_FORTE}1 - Minecraft{RESET} ({VERDE_FORTE}https://quenq.com/apps/minecraft/{RESET})")
-    print(f"{CIANO_FORTE}2 - Gta vice city{RESET} ({VERDE_FORTE}https://quenq.com/apps/vice-city/{RESET})")
-    print(f"{CIANO_FORTE}3 - Gta 3{RESET} ({VERDE_FORTE}https://quenq.com/apps/iii-online/{RESET})")
-    print(f"{CIANO_FORTE}4 - Veck.io{RESET} ({VERDE_FORTE}https://zapgames.io/veck-io{RESET})")
-
-    escolha_de_jogo = input(f"\n{BRANCO_FORTE}digite sua escolha: {RESET}")
-
-    if escolha_de_jogo == "1":
-        print("abrindo Minecraft...")
-        os.system("xdg-open https://quenq.com/apps/minecraft/")
-    elif escolha_de_jogo == "2":
-        print("abrindo gta vice city...")
-        os.system("xdg-open https://quenq.com/apps/vice-city/")
-    elif escolha_de_jogo == "3":
-        print("abrindo gta 3...")
-        os.system("xdg-open https://quenq.com/apps/iii-online/")
-    elif escolha_de_jogo == "4":
-        print("abrindo veck.io...")
-        os.system("xdg-open https://zapgames.io/veck-io")
-    else:
-        print("escolha invalida")
 
 
 def mostrar_pra_debian():
