@@ -126,7 +126,7 @@ def mostrar_jogos():
         os.system("xdg-open https://quenq.com/apps/iii-online")
     elif escolha_de_jogo == "4":
         print("abrindo veck.io...")
-        os.system("xdg-open https://quenq.com/apps/veck-io")
+        os.system("xdg-open https://veck.io/")
     else:
         print("escolha invalida")
 
