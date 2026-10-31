@@ -47,7 +47,7 @@ def buscar_quizzes(termo, limite=20):
             print("nenhum quiz encontrado")
             return
 
-        print(f"{amarelo_forte}{len(quizzes)}resultados encontrados{reset}")
+        print(f"{amarelo_forte}{len(quizzes)} resultados encontrados{reset}")
        
 
         for numero, quiz in enumerate(quizzes, 1):
