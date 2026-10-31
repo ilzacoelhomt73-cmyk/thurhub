@@ -64,12 +64,15 @@ def buscar_quizzes(termo, limite=20):
         print(f"{vermelho_forte}ERRO NA REQUISIÇÃO{reset}")
 
 def main():
-    termo = input("pesquise no kahoot: ")
+    while (True):
 
-    if not termo:
-        print("digite alguma coisa")
+        termo = input("pesquise no kahoot: ")
 
-    buscar_quizzes(termo)
+        if not termo.strip():
+            print("digite alguma coisa")
+            return  
+
+        buscar_quizzes(termo)
 
 
 if __name__ == "__main__":
