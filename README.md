@@ -11,12 +11,12 @@ git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && gc
 # para termux
 
 ```bash
-pip install requests && git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py
+pip install requests && git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && cd v2 && python3 v2/thurhub.py
 ```
 
 # para debian 
 
 ```bash 
-pip install requests --break-system-packages && git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py
+pip install requests --break-system-packages && git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && cd v2 && python3 v2/thurhub.py
 ```
 
