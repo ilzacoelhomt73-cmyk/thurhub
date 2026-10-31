@@ -8,6 +8,15 @@ git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && gc
 
 # instalar versão python (V2)
 
+# para termux
+
 ```bash
-git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py
+pip install requests && git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py
 ```
+
+# para debian 
+
+```bash 
+pip install requests --break-system-packages && git clone https://github.com/ilzacoelhomt73-cmyk/thurhub.git && cd thurhub && python3 v2/thurhub.py
+```
+

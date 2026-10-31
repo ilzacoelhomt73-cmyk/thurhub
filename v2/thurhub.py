@@ -177,6 +177,7 @@ def mostrar_pra_debian():
     print(f"{AMARELO_FORTE}2 - zphisher{RESET}")
     print(f"{AMARELO_FORTE}3 - jogos{RESET}")
     print(f"{AMARELO_FORTE}4 - vs code{RESET}")
+    print(f"{AMARELO_FORTE}5 - pesquisar no kahoot{RESET}")
 
     escolha = input(f"{CIANO_FORTE}\nEscolha: {RESET}")
 
@@ -205,6 +206,13 @@ def mostrar_pra_debian():
         print(f"{CIANO_FORTE}=== Instalando vs code ==={RESET}")
         subprocess.run(comando_vscode_debian, shell=True)
 
+    elif escolha == "5":
+        subprocess.run([
+            sys.executable,
+            "../scripts/buscar_uuid.py"
+        ])
+
+
     else:
         print("escolha invalida")
 
@@ -217,6 +225,7 @@ def mostrar_pra_termux():
     print(f"\n{AMARELO_FORTE}1 - hack para kahoot{RESET}")
     print(f"{AMARELO_FORTE}2 - zphisher{RESET}")
     print(f"{AMARELO_FORTE}3 - jogos{RESET}")
+    print(f"{AMARELO_FORTE}4 - pesquisar no kahoot{RESET}")
 
     escolha = input(f"{CIANO_FORTE}\nEscolha: {RESET}")
 
@@ -238,6 +247,12 @@ def mostrar_pra_termux():
 
     elif escolha == "3":
         mostrar_jogos()
+
+    elif escolha == "4":
+        subprocess.run([
+            sys.executable,
+            "../scripts/buscar_uuid.py"
+        ])
 
     else:
         print("escolha invalida")
