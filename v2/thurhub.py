@@ -1,12 +1,13 @@
 import hashlib
 import textwrap
 import os
-from getpass import getpass
+import getpass
 import time
 import sys
 import subprocess
 import platform
 import requests
+from datetime import datetime
 
 sistema = 0
 
@@ -27,7 +28,7 @@ comando_vscode_debian = (
     "sudo apt install -y code && "
     "code"
 )
-
+ 
 comando_zphisher_debian = (
     "sudo apt update -y && "
     "sudo apt upgrade -y && "
@@ -87,6 +88,15 @@ sites = {
         "Veck.io": "https://veck.io/"
         }
 
+
+def escrever(texto, limite=0.002):
+    for letra in texto:
+        sys.stdout.write(letra)
+        sys.stdout.flush()
+        time.sleep(limite)
+        
+
+
 def mostrar_jogos():
     respostas = {}
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
@@ -105,7 +115,7 @@ def mostrar_jogos():
     clear()
     banner()
 
-    print(f"\n{AMARELO_FORTE}!ALGUNS LINKS PODEM NÃO FUNCIONAR!{RESET}\n")
+    escrever(f"\n{AMARELO_FORTE}!ALGUNS LINKS PODEM NÃO FUNCIONAR!{RESET}\n")
 
     contador = 1
     for nome, link in sites.items():
@@ -116,19 +126,19 @@ def mostrar_jogos():
     escolha_de_jogo = input(f"\n{BRANCO_FORTE}digite sua escolha: {RESET}")
 
     if escolha_de_jogo == "1":
-        print("abrindo Minecraft...")
+        escrever("abrindo Minecraft...")
         os.system("xdg-open https://quenq.com/apps/minecraft/")
     elif escolha_de_jogo == "2":
-        print("abrindo gta vice city...")
+        escrever("abrindo gta vice city...")
         os.system("xdg-open https://quenq.com/apps/vice-city")
     elif escolha_de_jogo == "3":
-        print("abrindo gta 3...")
+        escrever("abrindo gta 3...")
         os.system("xdg-open https://quenq.com/apps/iii-online")
     elif escolha_de_jogo == "4":
-        print("abrindo veck.io...")
+        escrever("abrindo veck.io...")
         os.system("xdg-open https://veck.io/")
     else:
-        print("escolha invalida")
+        escrever("escolha invalida")
 
 
 def rodar(ferramenta, comando):
@@ -144,21 +154,40 @@ def clear():
 def banner():
     print(VERMELHO_FORTE, end="")
     print(textwrap.dedent(fr"""
-$$$$$$$$\ $$\                           $$\                 $$\       
-\__$$  __|$$ |                          $$ |                $$ |      
-   $$ |   $$$$$$$\  $$\   $$\  $$$$$$\  $$$$$$$\  $$\   $$\ $$$$$$$\  
-   $$ |   $$  __$$\ $$ |  $$ |$$  __$$\ $$  __$$\ $$ |  $$ |$$  __$$\ 
-   $$ |   $$ |  $$ |$$ |  $$ |$$ |  \__|$$ |  $$ |$$ |  $$ |$$ |  $$ |
-   $$ |   $$ |  $$ |$$ |  $$ |$$ |      $$ |  $$ |$$ |  $$ |$$ |  $$ |
-   $$ |   $$ |  $$ |\$$$$$$  |$$ |      $$ |  $$ |\$$$$$$  |$$$$$$$  |
-   \__|   \__|  \__| \______/ \__|      \__|  \__| \______/ \_______/ 
+████████╗██╗  ██╗██╗   ██╗██████╗ ██╗  ██╗██╗   ██╗██████╗ 
+╚══██╔══╝██║  ██║██║   ██║██╔══██╗██║  ██║██║   ██║██╔══██╗
+   ██║   ███████║██║   ██║██████╔╝███████║██║   ██║██████╔╝
+   ██║   ██╔══██║██║   ██║██╔══██╗██╔══██║██║   ██║██╔══██╗
+   ██║   ██║  ██║╚██████╔╝██║  ██║██║  ██║╚██████╔╝██████╔╝
+   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
 """).strip("\n")) 
     print(RESET, end="")
 
+def introducao():
+
+    dias = [
+        "Segunda-Feira",
+        "Terça-Feira",
+        "Quarta-Feira",
+        "Quinta-Feira",
+        "Sexta-Feira"
+    ]
+
+    agora = datetime.now().weekday()
+    dia = dias[agora]
+
+    usuario = getpass.getuser()
+
+
+    escrever(f"\n{MAGENTA}Bem vindo ao thurhub{RESET}\n")
+    escrever(f"\nusuario: {AMARELO_FORTE}{usuario}{RESET}\n", 0.01)
+    escrever(f"dia: {AMARELO_FORTE}{dia}{RESET}\n", 0.01)
+
+    
 
 
 def menu():
-    senha = getpass(f"{RESET}{BRANCO_FORTE}\ndigite a senha: {RESET}")
+    senha = getpass.getpass(f"{RESET}{BRANCO_FORTE}\ndigite a senha: {RESET}")
     hash_recebido = hashlib.sha256(senha.encode()).hexdigest()
 
     if hash_recebido == HASH_ESPERADO:
@@ -261,16 +290,17 @@ try:
 
     clear()
     banner()
+    introducao()
     menu()
-
+    
     clear()
     banner()
 
     try:
         detectado = platform.freedesktop_os_release()
-
+ 
         if detectado["ID"] == "debian":
-            print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}debian{RESET}")
+            escrever(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}debian{RESET}", 0.01)
             time.sleep(1)
             sistema = 2
 
@@ -278,7 +308,7 @@ try:
         pass
 
     if "TERMUX_VERSION" in os.environ:
-        print(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}termux{RESET}")
+        escrever(f"{AZUL_FORTE}\nsistema detectado: {RESET}{AMARELO_FORTE}termux{RESET}", 0.01)
         time.sleep(1)
         sistema = 1
 
